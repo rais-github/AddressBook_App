@@ -48,4 +48,6 @@ public class AddressBookServiceImpl implements IAddressBookService {
     public void deleteEntry(Long id) {
         repository.deleteById(id);
     }
+
+    public void test(){};
 }

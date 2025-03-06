@@ -10,5 +10,6 @@ public interface IAddressBookService {
     AddressBook getEntryById(Long id);
     AddressBook updateEntry(Long id, AddressBookDTO addressBookDTO);
     void deleteEntry(Long id);
+
 }
 
