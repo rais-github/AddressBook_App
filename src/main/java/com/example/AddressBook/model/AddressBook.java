@@ -3,14 +3,21 @@ package com.example.AddressBook.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="address_book")
+@Table(name = "address_book")
 public class AddressBook {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String address;
     private String phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private AuthUser user;
+
 
     public Long getId() {
         return id;
@@ -43,5 +50,12 @@ public class AddressBook {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-}
 
+    public AuthUser getUser() {
+        return user;
+    }
+
+    public void setUser(AuthUser user) {
+        this.user = user;
+    }
+}

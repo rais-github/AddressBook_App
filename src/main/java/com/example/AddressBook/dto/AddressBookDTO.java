@@ -1,11 +1,10 @@
 package com.example.AddressBook.dto;
 
-
-
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
 public class AddressBookDTO {
+
     @NotEmpty(message = "Name cannot be empty")
     private String name;
 
@@ -15,12 +14,16 @@ public class AddressBookDTO {
     @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
     private String phoneNumber;
 
+
+    private Long userId;
+
+    // Getters and Setters
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     public String getAddress() {
@@ -37,5 +40,13 @@ public class AddressBookDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
