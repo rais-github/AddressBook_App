@@ -8,10 +8,12 @@ import com.example.AddressBook.repository.AddressBookRepository;
 import com.example.AddressBook.repository.AuthUserRepository;
 import com.example.AddressBook.service.IAddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AddressBookServiceImpl implements IAddressBookService {
@@ -22,7 +24,29 @@ public class AddressBookServiceImpl implements IAddressBookService {
     @Autowired
     private AuthUserRepository authUserRepository;  // Inject User Repository
 
+    /**
+     * 🔥 Cache the Address Book List
+     */
     @Override
+    @Cacheable(value = "addressBookCache", key = "'allEntries'")
+    public List<AddressBook> getAllEntries() {
+        return repository.findAll();
+    }
+
+    /**
+     * 🔥 Cache a single entry when fetched
+     */
+    @Override
+    @Cacheable(value = "addressBookCache", key = "#id")
+    public AddressBook getEntryById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new AddressBookException("Entry not found"));
+    }
+
+    /**
+     * 🔥 Add an entry & Clear the cache
+     */
+    @Override
+    @CacheEvict(value = "addressBookCache", allEntries = true)
     public AddressBook addEntry(AddressBookDTO dto) {
         AddressBook entry = new AddressBook();
         entry.setName(dto.getName());
@@ -37,17 +61,11 @@ public class AddressBookServiceImpl implements IAddressBookService {
         return repository.save(entry);
     }
 
+    /**
+     * 🔥 Update an entry & Update the cache
+     */
     @Override
-    public List<AddressBook> getAllEntries() {
-        return repository.findAll();
-    }
-
-    @Override
-    public AddressBook getEntryById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new AddressBookException("Entry not found"));
-    }
-
-    @Override
+    @CachePut(value = "addressBookCache", key = "#id")
     public AddressBook updateEntry(Long id, AddressBookDTO dto) {
         AddressBook entry = getEntryById(id);
         entry.setName(dto.getName());
@@ -62,7 +80,11 @@ public class AddressBookServiceImpl implements IAddressBookService {
         return repository.save(entry);
     }
 
+    /**
+     * 🔥 Delete an entry & Clear cache
+     */
     @Override
+    @CacheEvict(value = "addressBookCache", key = "#id")
     public void deleteEntry(Long id) {
         repository.deleteById(id);
     }
