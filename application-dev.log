@@ -206,3 +206,41 @@
 2025-03-09T11:05:40.440+05:30 DEBUG 284 --- [AddressBook] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.css
 2025-03-09T11:05:40.733+05:30 DEBUG 284 --- [AddressBook] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api-docs/swagger-config
 2025-03-09T11:05:40.734+05:30 DEBUG 284 --- [AddressBook] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:06:45.953+05:30  INFO 16980 --- [AddressBook] [restartedMain] c.e.AddressBook.AddressBookApplication   : Starting AddressBookApplication using Java 18.0.1.1 with PID 16980 (D:\AddressBook\target\classes started by Himanshu Rai in D:\AddressBook)
+2025-03-09T11:06:45.957+05:30 DEBUG 16980 --- [AddressBook] [restartedMain] c.e.AddressBook.AddressBookApplication   : Running with Spring Boot v3.3.9, Spring v6.1.17
+2025-03-09T11:06:45.958+05:30  INFO 16980 --- [AddressBook] [restartedMain] c.e.AddressBook.AddressBookApplication   : The following 1 profile is active: "dev"
+2025-03-09T11:06:52.335+05:30 DEBUG 16980 --- [AddressBook] [restartedMain] c.e.A.util.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2025-03-09T11:06:52.614+05:30  WARN 16980 --- [AddressBook] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-09T11:06:52.649+05:30  INFO 16980 --- [AddressBook] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-03-09T11:06:53.067+05:30 DEBUG 16980 --- [AddressBook] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-03-09T11:06:53.335+05:30  WARN 16980 --- [AddressBook] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-03-09T11:06:53.631+05:30  INFO 16980 --- [AddressBook] [restartedMain] c.e.AddressBook.AddressBookApplication   : Started AddressBookApplication in 8.461 seconds (process running for 9.304)
+2025-03-09T11:06:53.637+05:30  INFO 16980 --- [AddressBook] [restartedMain] c.e.AddressBook.AddressBookApplication   : Address Book application is running in DEV Environment
+2025-03-09T11:06:53.639+05:30  INFO 16980 --- [AddressBook] [restartedMain] c.e.AddressBook.AddressBookApplication   : Address Book Db user is addressuser 
+2025-03-09T11:07:01.431+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/index.html
+2025-03-09T11:07:01.451+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.466+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.html
+2025-03-09T11:07:01.549+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui.css
+2025-03-09T11:07:01.549+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/index.css
+2025-03-09T11:07:01.550+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.550+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.551+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.css
+2025-03-09T11:07:01.552+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui.css
+2025-03-09T11:07:01.551+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-03-09T11:07:01.551+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-bundle.js
+2025-03-09T11:07:01.557+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-initializer.js
+2025-03-09T11:07:01.556+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.558+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.558+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-initializer.js
+2025-03-09T11:07:01.559+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-bundle.js
+2025-03-09T11:07:01.556+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.562+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-standalone-preset.js
+2025-03-09T11:07:01.780+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /v3/api-docs/swagger-config
+2025-03-09T11:07:01.781+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.782+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /v3/api-docs/swagger-config
+2025-03-09T11:07:01.785+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/favicon-32x32.png
+2025-03-09T11:07:01.787+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.788+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/favicon-32x32.png
+2025-03-09T11:07:01.826+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /v3/api-docs
+2025-03-09T11:07:01.827+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-03-09T11:07:01.827+05:30 DEBUG 16980 --- [AddressBook] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /v3/api-docs
