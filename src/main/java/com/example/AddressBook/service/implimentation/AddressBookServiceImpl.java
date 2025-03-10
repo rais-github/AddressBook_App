@@ -22,6 +22,11 @@ public class AddressBookServiceImpl implements IAddressBookService {
     private AddressBookRepository repository;
 
     @Autowired
+    private  MessagePublisher messagePublisher;
+
+
+
+    @Autowired
     private AuthUserRepository authUserRepository;  // Inject User Repository
 
     /**
@@ -45,20 +50,26 @@ public class AddressBookServiceImpl implements IAddressBookService {
     /**
      * 🔥 Add an entry & Clear the cache
      */
-    @Override
+
     @CacheEvict(value = "addressBookCache", allEntries = true)
+    @Override
     public AddressBook addEntry(AddressBookDTO dto) {
         AddressBook entry = new AddressBook();
         entry.setName(dto.getName());
         entry.setAddress(dto.getAddress());
         entry.setPhoneNumber(dto.getPhoneNumber());
 
-        // 🔥 Fetch User from Database
         AuthUser user = authUserRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new AddressBookException("User not found with ID: " + dto.getUserId()));
 
         entry.setUser(user);
-        return repository.save(entry);
+        AddressBook savedEntry = repository.save(entry);
+
+        // 🔥 Publish event for new contact added
+        String message = "New contact added: " + entry.getName();
+        messagePublisher.sendMessage("address.book.queue", message);
+
+        return savedEntry;
     }
 
     /**

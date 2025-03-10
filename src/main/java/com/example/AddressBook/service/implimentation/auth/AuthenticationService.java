@@ -9,6 +9,7 @@ import com.example.AddressBook.repository.AuthUserRepository;
 import com.example.AddressBook.repository.AddressBookRepository;
 import com.example.AddressBook.service.IAuthenticationService;
 import com.example.AddressBook.service.implimentation.EmailService;
+import com.example.AddressBook.service.implimentation.MessagePublisher;
 import com.example.AddressBook.util.JwtUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,9 @@ public class AuthenticationService implements IAuthenticationService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final EmailService emailService;
+    private final MessagePublisher messagePublisher;
 
-    public AuthenticationService(AuthUserRepository authUserRepository,
+    public AuthenticationService(MessagePublisher publisher,AuthUserRepository authUserRepository,
                                  AddressBookRepository addressBookRepository,
                                  BCryptPasswordEncoder passwordEncoder,
                                  JwtUtil jwtUtil,
@@ -35,6 +37,7 @@ public class AuthenticationService implements IAuthenticationService {
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
         this.emailService = emailService;
+        this.messagePublisher=publisher;
     }
 
     @Override
@@ -77,6 +80,41 @@ public class AuthenticationService implements IAuthenticationService {
         return "Password has been changed successfully!";
     }
 
+//    @Override
+//    public String registerUser(AuthUserDTO userDTO) {
+//        if (authUserRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+//            return "Email is already in use.";
+//        }
+//
+//        AuthUser user = new AuthUser();
+//        user.setUsername(userDTO.getUsername());
+//        user.setEmail(userDTO.getEmail());
+//        user.setRole(userDTO.getRole());
+//        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+//
+//        AuthUser savedUser = authUserRepository.save(user);
+//
+//        // Save associated address book entries
+//        List<AddressBook> addressBookEntries = userDTO.getAddressBookEntries().stream().map(dto -> {
+//            AddressBook addressBook = new AddressBook();
+//            addressBook.setName(dto.getName());
+//            addressBook.setAddress(dto.getAddress());
+//            addressBook.setPhoneNumber(dto.getPhoneNumber());
+//            addressBook.setUser(savedUser);
+//            return addressBook;
+//        }).collect(Collectors.toList());
+//
+//        addressBookRepository.saveAll(addressBookEntries);
+//
+//        // Send a welcome email
+//        String subject = "Welcome to AddressBookApp!";
+//        String message = "Hello " + user.getUsername() + ", welcome to our application!\n\n"
+//                + "You can now securely manage your contacts.";
+//
+//        emailService.sendEmail(user.getEmail(), subject, message, user.getEmail());
+//
+//        return "User registered successfully!";
+//    }
     @Override
     public String registerUser(AuthUserDTO userDTO) {
         if (authUserRepository.findByEmail(userDTO.getEmail()).isPresent()) {
@@ -91,28 +129,12 @@ public class AuthenticationService implements IAuthenticationService {
 
         AuthUser savedUser = authUserRepository.save(user);
 
-        // Save associated address book entries
-        List<AddressBook> addressBookEntries = userDTO.getAddressBookEntries().stream().map(dto -> {
-            AddressBook addressBook = new AddressBook();
-            addressBook.setName(dto.getName());
-            addressBook.setAddress(dto.getAddress());
-            addressBook.setPhoneNumber(dto.getPhoneNumber());
-            addressBook.setUser(savedUser);
-            return addressBook;
-        }).collect(Collectors.toList());
-
-        addressBookRepository.saveAll(addressBookEntries);
-
-        // Send a welcome email
-        String subject = "Welcome to AddressBookApp!";
-        String message = "Hello " + user.getUsername() + ", welcome to our application!\n\n"
-                + "You can now securely manage your contacts.";
-
-        emailService.sendEmail(user.getEmail(), subject, message, user.getEmail());
+        // 🔥 Publish event for sending a welcome email
+        String message = "New user registered: " + user.getEmail();
+        messagePublisher.sendMessage("user.registration.queue", message);
 
         return "User registered successfully!";
     }
-
     @Override
     public LoginResponseDTO loginUser(LoginDTO loginDTO) {
         Optional<AuthUser> userOptional = authUserRepository.findByEmail(loginDTO.getEmail());
