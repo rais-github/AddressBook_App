@@ -57,20 +57,25 @@ public class AddressBookServiceImpl implements IAddressBookService {
         AddressBook entry = new AddressBook();
         entry.setName(dto.getName());
         entry.setAddress(dto.getAddress());
+        entry.setCity(dto.getCity());       // Added city
+        entry.setState(dto.getState());     // Added state
+        entry.setPincode(dto.getPincode()); // Added pincode
         entry.setPhoneNumber(dto.getPhoneNumber());
 
         AuthUser user = authUserRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new AddressBookException("User not found with ID: " + dto.getUserId()));
 
         entry.setUser(user);
+
         AddressBook savedEntry = repository.save(entry);
 
         // 🔥 Publish event for new contact added
-        String message = "New contact added: " + entry.getName();
+        String message = "New contact added: " + entry.getName() + " (" + entry.getCity() + ", " + entry.getState() + ")";
         messagePublisher.sendMessage("address.book.queue", message);
 
         return savedEntry;
     }
+
 
     /**
      * 🔥 Update an entry & Update the cache
@@ -82,7 +87,9 @@ public class AddressBookServiceImpl implements IAddressBookService {
         entry.setName(dto.getName());
         entry.setAddress(dto.getAddress());
         entry.setPhoneNumber(dto.getPhoneNumber());
-
+        entry.setCity(dto.getCity());
+        entry.setState(dto.getState());
+        entry.setPincode(dto.getPincode());
         // 🔥 Fetch and update User
         AuthUser user = authUserRepository.findById(dto.getUserId())
                 .orElseThrow(() -> new AddressBookException("User not found with ID: " + dto.getUserId()));

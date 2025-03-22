@@ -100,7 +100,11 @@ public class AuthenticationService implements IAuthenticationService {
             addressBook.setName(dto.getName());
             addressBook.setAddress(dto.getAddress());
             addressBook.setPhoneNumber(dto.getPhoneNumber());
+            addressBook.setPincode(dto.getPincode());
+            addressBook.setCity(dto.getCity());
+            addressBook.setState(dto.getState());
             addressBook.setUser(savedUser);
+
             return addressBook;
         }).collect(Collectors.toList());
 
